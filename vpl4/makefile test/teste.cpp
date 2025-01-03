@@ -1,6 +1,6 @@
 #include <iostream>
 
-int main(){
+int testez(){
 
     std::cout << "Teste" << std::endl;
 
