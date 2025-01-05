@@ -1,16 +1,19 @@
-OUTPUT_DIR = ./output
+all: exec
 
-all:
+exec: main.o onibus.o empresa.o
+	g++ build/main.o build/onibus.o build/empresa.o -o build/exec.exe
 
-${OUTPUT_DIR}/main:
-	g++
+main.o: src/main.cpp
+	g++ -Iinclude -c src/main.cpp -o build/$@
 
-${OUTPUT_DIR}/onibus:
-	g++
+empresa.o: src/empresa.cpp
+	g++ -Iinclude -c src/empresa.cpp -o build/$@
 
-${OUTPUT_DIR}/empresa:
-	g++
+onibus.o: src/onibus.cpp
+	g++ -Iinclude -c src/onibus.cpp -o build/$@
 
+clean_linux:
+	rm -rf build/*
 
 clean:
-	rm -f ${OUTPUT_DIR}/*
+	del /Q build\*
