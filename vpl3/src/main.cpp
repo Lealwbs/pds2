@@ -8,8 +8,8 @@ int main() {
     string pplaca;
     int num_aux;
 
-    while (cin >> resposta) {
-        cout << resposta << endl;
+    while (true) {
+        cin >> resposta;
         if (resposta == "C") {
             cin >> pplaca;
             cin >> num_aux; // lotação maxima
@@ -28,7 +28,7 @@ int main() {
         if (resposta == "S") {
             cin >> pplaca;
             cin >> num_aux; // qtde pessoas que subiram
-
+            cout << pplaca << num_aux << endl;
             if (BH_BUS.busca_onibus(pplaca) == nullptr) {
                 cout << "ERRO : onibus inexistente" << endl;
             } else if ((BH_BUS.busca_onibus(pplaca))->lot_atual + num_aux > (BH_BUS.busca_onibus(pplaca))->cap_max) {
@@ -46,7 +46,7 @@ int main() {
 
             if (BH_BUS.busca_onibus(pplaca) == nullptr) {
                 cout << "ERRO : onibus inexistente" << endl;
-            } else if ((BH_BUS.busca_onibus(pplaca)) - num_aux < 0) {
+            } else if ((BH_BUS.busca_onibus(pplaca)->lot_atual) - num_aux < 0) {
                 cout << "ERRO : faltam passageiros" << endl;
             } else {
                 BH_BUS.busca_onibus(pplaca)->descer_psg(num_aux);
@@ -55,26 +55,26 @@ int main() {
         };
 
 
-        // if (resposta == "T") {
-        //     cin >> pplaca;
-        //     cin >> num_aux; // qtde pessoas que desceram
-        //
-        //     if (Onibus.BH_BUS.buscar_placa(pplaca) == nullptr) {
-        //         cout << "ERRO : onibus inexistente" << endl;
-        //     } else if (Onibus.BH_BUS->lot_atual - num_aux < 0) {
-        //         cout << "ERRO : faltam passageiros" << endl;
-        //     } else {
-        //         Onibus.BH_BUS.descer_psg(num_aux);
-        //         cout << "passageiros desceram com sucesso" << endl;
-        //     };
-        //
-        // };
+        if (resposta == "T") {
+            cin >> pplaca;
+            string pplaca2;
+            cin >> pplaca2;
+            cin >> num_aux; // qtde pessoas que foram transferidas
 
-        //T : transfere pessoas de um ônibus a outro . Você poderá considerar que os valores fornecidos serão sempre positivos.
-        // Deve ser impresso: “transferencia de passageiros efetuada” em caso de sucesso ou “ERRO : onibus inexistente” caso um das
-        // placas dos onibus indicadas sejam inválidas ou “ERRO : transferencia cancelada” se tem alguma situação de lotação invalida.
+            if (BH_BUS.busca_onibus(pplaca) == nullptr || BH_BUS.busca_onibus(pplaca) == nullptr) {
+                cout << "ERRO : onibus inexistente" << endl;
+            } else if ((BH_BUS.busca_onibus(pplaca)->lot_atual) - num_aux < 0 || (BH_BUS.busca_onibus(pplaca2))->lot_atual + num_aux > (BH_BUS.busca_onibus(pplaca2))->cap_max) {
+                cout << "ERRO : transferencia cancelada" << endl;
+            } else {
+                BH_BUS.busca_onibus(pplaca)->transf_psg(BH_BUS.busca_onibus(pplaca2), num_aux);
+
+                cout << "transferencia de passageiros efetuada" << endl;
+            };
+        };
+
 
         if (resposta == "I") {
+            BH_BUS.imprimir_estado();
         };
 
         if (resposta == "F") {
@@ -82,22 +82,3 @@ int main() {
         };
     };
 };
-
-
-// T : transfere pessoas de um ônibus a outro . Você poderá considerar que os valores fornecidos serão sempre positivos.
-// Deve ser impresso: “transferencia de passageiros efetuada” em caso de sucesso ou “ERRO : onibus inexistente” caso um das
-// placas dos onibus indicadas sejam inválidas ou “ERRO : transferencia cancelada” se tem alguma situação de lotação invalida.
-// I: lista as informações de todos os ônibus cadastrados (placa, lotação atual, lotação máxima), um ônibus por linha.
-// F: Finaliza a execução do programa.
-// Segue abaixo um exemplo de uma execução do Sistema:
-//
-// C OLX123 11 novo onibus cadastrado C OLX123 12 ERRO : onibus repetido I OLX123 (0/11) S OLX123 10 passageiros subiram
-// com sucesso D OLX123 5 passageiros desceram com sucesso I OLX123 (5/11) C BBB222 10 novo onibus cadastrado S BBB222 2
-// passageiros subiram com sucesso I OLX123 (5/11) BBB222 (2/10) F
-//
-// Você deverá submeter 5 arquivos: Onibus.hpp, Onibus.cpp, Empresa.hpp, Empresa.cpp e main.cpp. No seu programa principal,
-// você não deverá acessar diretamente os atributos dos seus TADs. Todaso o acesso deverá ser feito através dos métodos
-// implementados.
-//
-//
-// tes

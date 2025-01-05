@@ -4,9 +4,9 @@
 #include <iostream>
 
 struct Empresa {
-    int NUM_MAX_ONIBUS;
+    static const int NUM_MAX_ONIBUS = 20;
+    Onibus *vetor_onibus[NUM_MAX_ONIBUS];
     int qtde_onibus;
-    Onibus *vetor_onibus[];
 
     Empresa();
 
